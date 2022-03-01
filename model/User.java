@@ -3,8 +3,10 @@ package com.pluralsight.conference.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "conf_users")
 public class User {
 
     @Id
