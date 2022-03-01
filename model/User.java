@@ -1,9 +1,6 @@
 package com.pluralsight.conference.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "CONF_USERS")
@@ -12,7 +9,9 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(name = "first_name")
     private String firstname;
+    @Column(name = "last_name")
     private String lastname;
     private int age;
 
