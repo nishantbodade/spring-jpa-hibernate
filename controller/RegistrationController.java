@@ -1,6 +1,7 @@
 package com.pluralsight.conference.controller;
 
 import com.pluralsight.conference.model.Registration;
+import com.pluralsight.conference.model.RegistrationReport;
 import com.pluralsight.conference.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,14 @@ public class RegistrationController {
     List<Registration> getRegistrations() {
         List<Registration> registrations=registrationService.findAll();
         return registrations;
+    }
+
+
+    @GetMapping("registrations-reports")
+    public @ResponseBody
+    List<RegistrationReport> getRegistrationsReport() {
+        List<RegistrationReport> registrationsReports=registrationService.findAllReports();
+        return registrationsReports;
     }
 
 
