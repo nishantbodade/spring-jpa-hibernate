@@ -4,7 +4,7 @@ import com.pluralsight.conference.model.Course;
 import com.pluralsight.conference.model.Registration;
 import com.pluralsight.conference.model.RegistrationReport;
 import com.pluralsight.conference.repository.CourseRepository;
-import com.pluralsight.conference.repository.RegistartionRepository;
+import com.pluralsight.conference.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,31 +15,33 @@ import java.util.List;
 public class RegistrationServiceImpl implements RegistrationService {
 
     @Autowired
-    RegistartionRepository registartionRepository;
+    RegistrationRepository registrationRepository;
     @Autowired
     CourseRepository courseRepository;
 
     @Override
     @Transactional
     public Registration addRegistration(Registration registration){
-        registration= registartionRepository.save(registration);
+        registration= registrationRepository.save(registration);
 
-        Course course=new Course();
-        course.setName("Intro");
-        course.setDescription("every one attends");
-        course.setRegistration(registration);
-        courseRepository.save(course);
+        if(registration.getId()==null) {
+            Course course = new Course();
+            course.setName("Intro");
+            course.setDescription("every one attends");
+            course.setRegistration(registration);
+            courseRepository.save(course);
+        }
 
         return registration;
     }
 
     @Override
     public List<Registration> findAll() {
-        return registartionRepository.findAll();
+        return registrationRepository.findAll();
     }
 
     @Override
     public List<RegistrationReport> findAllReports() {
-        return registartionRepository.findAllReports();
+        return registrationRepository.registrationReport();
     }
 }
