@@ -8,7 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "REGISTRATION")
+@NamedQueries({
+        @NamedQuery(name =Registration.REGISTRATION_REPORT,query = Registration
+                .REGISTRATION_REPORT_JPQL)
+})
 public class Registration {
+
+    public static final String REGISTRATION_REPORT="registrationReport";
+    
+    public static final String REGISTRATION_REPORT_JPQL="select new com.pluralsight.conference.model.RegistrationReport"+
+            "(r.name, c.name, c.description) "+
+            "from Registration r, Course  c "+
+            "where r.id = c.registration.id";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
